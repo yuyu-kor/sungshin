@@ -2,7 +2,6 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import Navbar from "@/components/Navbar";
 
 export default function CommunicationPage() {
   const [form, setForm] = React.useState({
@@ -22,7 +21,6 @@ export default function CommunicationPage() {
 
   function onSubmit(e) {
     e.preventDefault();
-    // TODO: API 연동 (예: /api/contact) — 현재는 데모용
     setSubmitted(true);
     setTimeout(() => setSubmitted(false), 3000);
   }
@@ -42,30 +40,11 @@ export default function CommunicationPage() {
 
       {/* 본문 */}
       <main className="bg-white">
-        <div className="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-4 py-8 md:grid-cols-[200px_1fr]">
-          {/* 좌측 서브내비 */}
-          <aside className="md:pt-2">
-            <h3 className="mb-2 text-sm font-semibold text-slate-700">메뉴</h3>
-            <nav className="space-y-1 text-sm">
-              <Link
-                href="/convenience"
-                className="block rounded-md px-3 py-2 text-slate-700 hover:bg-slate-50"
-              >
-                편의 정보
-              </Link>
-              <span className="block rounded-md bg-violet-50 px-3 py-2 font-medium text-[#5b61a8] ring-1 ring-violet-200">
-                소통
-              </span>
-              <Link
-                href="/notices/organization"
-                className="block rounded-md px-3 py-2 text-slate-700 hover:bg-slate-50"
-              >
-                조직도
-              </Link>
-            </nav>
-
-            {/* 연락/운영시간 카드 */}
-            <div className="mt-6 rounded-lg border border-slate-200 bg-slate-50 p-4">
+        <div className="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-4 py-8 md:grid-cols-[250px_1fr]">
+          {/* 좌측 aside: 연락처 + SNS */}
+          <aside className="space-y-6 md:pt-2">
+            {/* 연락처 카드 */}
+            <div className="rounded-lg border border-slate-200 bg-slate-50 p-4">
               <p className="text-sm font-semibold">연락처 · 운영시간</p>
               <ul className="mt-2 space-y-1 text-sm text-slate-700">
                 <li>
@@ -82,8 +61,8 @@ export default function CommunicationPage() {
               </ul>
             </div>
 
-            {/* SNS 빠른 링크 */}
-            <div className="mt-6 space-y-2">
+            {/* SNS 링크 */}
+            <div className="space-y-2">
               <a
                 href="https://instagram.com/sungshinchonghak"
                 target="_blank"
@@ -125,7 +104,7 @@ export default function CommunicationPage() {
             </div>
           </aside>
 
-          {/* 우측 콘텐츠 */}
+          {/* 우측 메인 콘텐츠 */}
           <section>
             <div className="mb-6">
               <h1 className="text-2xl font-bold tracking-tight">소통</h1>
@@ -135,7 +114,7 @@ export default function CommunicationPage() {
               </p>
             </div>
 
-            {/* 상단 3열: 건의/민원/제휴 카드 */}
+            {/* 상단 3카드 */}
             <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
               <InfoCard title="학생 건의/민원" desc="학사·시설·생활 전반 의견">
                 <a
@@ -166,7 +145,7 @@ export default function CommunicationPage() {
               </InfoCard>
             </div>
 
-            {/* 제휴/언론 안내 블록 */}
+            {/* 제휴/언론 안내 */}
             <div
               id="partner"
               className="mt-8 rounded-lg border border-slate-200 bg-white p-4"
@@ -174,7 +153,7 @@ export default function CommunicationPage() {
               <h2 className="text-base font-semibold">대외 제휴/협업 안내</h2>
               <ul className="mt-2 space-y-1 text-sm text-slate-700">
                 <li>· 대상: 기업/기관/학생단체/동아리</li>
-                <li>· 제안서 형식: PDF 또는 링크(목적·대상·일정·예산·역할)</li>
+                <li>· 제안서 형식: PDF 또는 링크</li>
                 <li>· 회신: 영업일 기준 3~5일 내 이메일 회신</li>
               </ul>
             </div>
@@ -197,7 +176,7 @@ export default function CommunicationPage() {
               </ul>
             </div>
 
-            {/* 소통 폼 */}
+            {/* 폼 */}
             <div id="form" className="mt-10">
               <h2 className="text-lg font-semibold">문의/건의 접수</h2>
               <form
@@ -298,54 +277,6 @@ export default function CommunicationPage() {
                   )}
                 </div>
               </form>
-            </div>
-
-            {/* 실시간 소통 영역 (자리표시자) */}
-            <div className="mt-10 grid grid-cols-1 gap-4 md:grid-cols-2">
-              <div className="rounded-lg border border-slate-200 bg-slate-50 p-4">
-                <p className="text-sm font-semibold">학생회 카카오채널</p>
-                <div className="mt-2 aspect-[16/9] w-full rounded-md bg-slate-200" />
-                <p className="mt-2 text-xs text-slate-500">
-                  ※ 위젯/QR 연동 예정
-                </p>
-              </div>
-              <div className="rounded-lg border border-slate-200 bg-slate-50 p-4">
-                <p className="text-sm font-semibold">인스타그램 DM</p>
-                <div className="mt-2 aspect-[16/9] w-full rounded-md bg-slate-200" />
-                <p className="mt-2 text-xs text-slate-500">
-                  ※ 임베드/링크 버튼 연결 예정
-                </p>
-              </div>
-            </div>
-
-            {/* 자주 묻는 질문 */}
-            <div className="mt-10">
-              <h2 className="text-lg font-semibold">FAQ</h2>
-              <div className="mt-3 divide-y rounded-md border border-slate-200 bg-white">
-                {[
-                  {
-                    q: "시설 불편 신고는 어디로 하나요?",
-                    a: "소통 폼에서 ‘민원’ 선택 후 위치·사진을 함께 보내주세요.",
-                  },
-                  {
-                    q: "답변은 언제 오나요?",
-                    a: "영업일 기준 3~5일 내 이메일로 회신합니다.",
-                  },
-                  {
-                    q: "익명 건의 가능한가요?",
-                    a: "가능합니다. 이름/이메일 없이 제출하면 회신은 불가합니다.",
-                  },
-                ].map((f, i) => (
-                  <details key={i} className="group">
-                    <summary className="cursor-pointer list-none px-4 py-3 text-sm font-medium text-slate-800 hover:bg-slate-50">
-                      {f.q}
-                    </summary>
-                    <div className="px-4 pb-4 text-sm text-slate-600">
-                      {f.a}
-                    </div>
-                  </details>
-                ))}
-              </div>
             </div>
           </section>
         </div>

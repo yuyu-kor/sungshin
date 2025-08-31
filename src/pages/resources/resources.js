@@ -1,29 +1,81 @@
 // pages/resources/index.jsx
 import React from "react";
 import Link from "next/link";
-import Image from "next/image";
 
+// 연도/태그
 const YEARS = ["2025", "2024", "2023"];
 const TAGS = [
   "회의록",
-  "보고서",
-  "정책",
+  "선거 시행 세칙",
+  "총학생회 회칙",
+  "가이드라인",
+  "전공선택 자료집",
   "양식",
-  "브랜딩",
-  "미디어",
-  "예산",
-  "데이터",
 ];
 
+// 데모 문서 데이터 (실제 배포 시 href 채워넣기)
 const DOCS = [
-  { title: "정기회의 회의록(1월 2주차)", tag: "회의록", date: "2025-01-12" },
-  { title: "학기 초 사업계획(안)", tag: "보고서", date: "2025-02-28" },
-  { title: "학생 복지 지침 v1.2", tag: "정책", date: "2025-03-10" },
-  { title: "공문 양식(대내)", tag: "양식", date: "2025-01-03" },
-  { title: "로고 가이드라인 v3", tag: "브랜딩", date: "2025-02-02" },
-  { title: "보도자료 템플릿", tag: "미디어", date: "2025-03-03" },
-  { title: "1분기 예산 집행 요약", tag: "예산", date: "2025-04-05" },
-  { title: "행사 만족도 설문 데이터 샘플", tag: "데이터", date: "2025-05-01" },
+  // 회의록
+  {
+    title: "정기회의 회의록(3월 2주차)",
+    tag: "회의록",
+    date: "2025-03-12",
+    href: "#",
+  },
+  {
+    title: "운영위원회 회의록(2월)",
+    tag: "회의록",
+    date: "2025-02-26",
+    href: "#",
+  },
+  {
+    title: "집행국 합동 회의록(1월)",
+    tag: "회의록",
+    date: "2025-01-18",
+    href: "#",
+  },
+
+  // 선거 시행 세칙
+  {
+    title: "선거 시행 세칙 v2.1 (2025 개정)",
+    tag: "선거 시행 세칙",
+    date: "2025-02-05",
+    href: "#",
+  },
+
+  // 총학생회 회칙
+  {
+    title: "총학생회 회칙 v4.0 (전면 개정)",
+    tag: "총학생회 회칙",
+    date: "2025-01-20",
+    href: "#",
+  },
+
+  // 가이드라인
+  {
+    title: "행사 운영 가이드 v1.3",
+    tag: "가이드라인",
+    date: "2025-03-02",
+    href: "#",
+  },
+  {
+    title: "홍보물 제작 가이드 v1.1",
+    tag: "가이드라인",
+    date: "2025-02-14",
+    href: "#",
+  },
+
+  // 전공선택 자료집
+  {
+    title: "전공선택 자료집 2025 (통합판)",
+    tag: "전공선택 자료집",
+    date: "2025-02-28",
+    href: "#",
+  },
+
+  // 양식
+  { title: "공문 양식(대내)", tag: "양식", date: "2025-01-03", href: "#" },
+  { title: "사업계획서 템플릿", tag: "양식", date: "2025-01-15", href: "#" },
 ];
 
 export default function ResourcesPage() {
@@ -37,9 +89,9 @@ export default function ResourcesPage() {
     );
 
   const filtered = DOCS.filter((d) => {
+    const q = query.toLowerCase();
     const byQuery =
-      d.title.toLowerCase().includes(query.toLowerCase()) ||
-      d.tag.toLowerCase().includes(query.toLowerCase());
+      d.title.toLowerCase().includes(q) || d.tag.toLowerCase().includes(q);
     const byTag = activeTags.length === 0 || activeTags.includes(d.tag);
     const byYear = d.date.startsWith(activeYear);
     return byQuery && byTag && byYear;
@@ -61,37 +113,18 @@ export default function ResourcesPage() {
       {/* 본문 */}
       <main className="bg-white">
         <div className="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-4 py-8 md:grid-cols-[200px_1fr]">
-          {/* 좌측 서브내비 */}
+          {/* 좌측 사이드: 업로드 안내 */}
           <aside className="md:pt-2">
-            <h3 className="mb-2 text-sm font-semibold text-slate-700">메뉴</h3>
-            <nav className="space-y-1 text-sm">
-              <Link
-                href="/convenience"
-                className="block rounded-md px-3 py-2 text-slate-700 hover:bg-slate-50"
-              >
-                편의 정보
-              </Link>
-              <Link
-                href="/communication"
-                className="block rounded-md px-3 py-2 text-slate-700 hover:bg-slate-50"
-              >
-                소통
-              </Link>
-              <span className="block rounded-md bg-violet-50 px-3 py-2 font-medium text-[#5b61a8] ring-1 ring-violet-200">
-                자료
-              </span>
-            </nav>
-
-            {/* 업로드 안내 카드 (자리표시자) */}
-            <div className="mt-6 rounded-lg border border-slate-200 bg-slate-50 p-4">
-              <p className="text-sm font-semibold">업로드 안내</p>
+            <h3 className="mb-2 text-sm font-semibold text-slate-700">안내</h3>
+            <div className="rounded-lg border border-slate-200 bg-slate-50 p-4">
+              <p className="text-sm font-semibold">업로드 규칙</p>
               <ul className="mt-2 space-y-1 text-sm text-slate-700">
                 <li>
-                  · 파일명 규칙:{" "}
+                  · 파일명:{" "}
                   <span className="font-mono">[연도]_[분류]_[제목]_vX</span>
                 </li>
-                <li>· 허용 확장자: PDF, DOCX, PPTX, XLSX, ZIP</li>
-                <li>· 버전 관리: v1, v1.1, v2…</li>
+                <li>· 확장자: PDF, DOCX, PPTX, XLSX, ZIP</li>
+                <li>· 버전: v1, v1.1, v2… (변경 이력 유지)</li>
               </ul>
             </div>
           </aside>
@@ -101,24 +134,25 @@ export default function ResourcesPage() {
             <div className="mb-6">
               <h1 className="text-2xl font-bold tracking-tight">자료</h1>
               <p className="mt-1 text-sm text-slate-600">
-                회의록, 보고서, 정책/규정, 양식, 브랜딩 에셋, 미디어 키트,
-                예산·결산 자료를 모았습니다.
+                회의록, 선거 시행 세칙, 총학생회 회칙, 가이드라인, 전공선택
+                자료집 등 학생회 배포 자료를 모았습니다.
               </p>
             </div>
 
-            {/* 검색/태그/연도 탭 */}
+            {/* 검색/태그/연도 */}
             <div className="mb-6 space-y-3">
               <div className="flex items-center gap-2">
                 <input
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
-                  placeholder="예: 회의록, 양식, 로고, 예산..."
+                  placeholder="예: 회의록, 세칙, 회칙, 가이드, 전공선택..."
                   className="h-10 w-full rounded-md border border-slate-200 bg-white px-3 text-sm outline-none placeholder:text-slate-400 focus:border-[#5b61a8]"
                 />
                 <button className="h-10 rounded-md bg-[#5b61a8] px-4 text-sm font-medium text-white">
                   검색
                 </button>
               </div>
+
               <div className="flex flex-wrap items-center gap-2">
                 {TAGS.map((t) => (
                   <button
@@ -134,6 +168,7 @@ export default function ResourcesPage() {
                   </button>
                 ))}
               </div>
+
               <div className="flex flex-wrap items-center gap-4 text-sm text-slate-600">
                 {YEARS.map((y) => (
                   <button
@@ -151,9 +186,9 @@ export default function ResourcesPage() {
               </div>
             </div>
 
-            {/* 문서 자료실 (표) */}
+            {/* 전체 자료(필터 적용) */}
             <section id="docs" className="scroll-mt-20">
-              <h2 className="text-lg font-semibold">문서 자료실</h2>
+              <h2 className="text-lg font-semibold">전체 자료</h2>
               <div className="mt-3 overflow-hidden rounded-lg border border-slate-200">
                 <table className="min-w-full text-left text-sm">
                   <thead className="bg-slate-50 text-xs text-slate-500">
@@ -169,14 +204,14 @@ export default function ResourcesPage() {
                   {filtered.map((d, i) => (
                     <li
                       key={i}
-                      className="grid grid-cols-1 gap-2 px-4 py-3 sm:grid-cols-[1fr_120px_120px_120px] sm:items-center"
+                      className="grid grid-cols-1 gap-2 px-4 py-3 sm:grid-cols-[1fr_160px_120px_120px] sm:items-center"
                     >
                       <div className="text-slate-800">{d.title}</div>
                       <div className="text-xs text-slate-600">{d.tag}</div>
                       <div className="text-xs text-slate-600">{d.date}</div>
                       <div>
                         <a
-                          href="#"
+                          href={d.href}
                           className="inline-flex items-center rounded-md border border-slate-300 px-3 py-1 text-xs hover:bg-slate-50"
                         >
                           다운로드
@@ -193,128 +228,62 @@ export default function ResourcesPage() {
               </div>
             </section>
 
-            {/* 회의록/보고서 카드 */}
-            <section id="minutes" className="mt-10 scroll-mt-20">
-              <h2 className="text-lg font-semibold">회의록 · 보고서</h2>
-              <div className="mt-3 grid grid-cols-1 gap-4 md:grid-cols-3">
-                {[
-                  {
-                    title: "정기회의 회의록 템플릿",
-                    desc: "목차/안건/의결/액션아이템",
-                    tag: "회의록",
-                  },
-                  {
-                    title: "사업계획 보고서 템플릿",
-                    desc: "배경/목표/일정/예산",
-                    tag: "보고서",
-                  },
-                  {
-                    title: "사업 결과 보고서 템플릿",
-                    desc: "성과/지표/개선사항",
-                    tag: "보고서",
-                  },
-                ].map((c, idx) => (
-                  <Card key={idx} title={c.title} tag={c.tag}>
-                    <p className="text-xs text-slate-500">{c.desc}</p>
-                    <div className="mt-3 flex gap-2">
-                      <a
-                        href="#"
-                        className="rounded-md border border-slate-300 px-3 py-1 text-xs hover:bg-slate-50"
-                      >
-                        미리보기
-                      </a>
-                      <a
-                        href="#"
-                        className="rounded-md bg-[#5b61a8] px-3 py-1 text-xs text-white"
-                      >
-                        다운로드
-                      </a>
-                    </div>
-                  </Card>
-                ))}
-              </div>
-            </section>
-
-            {/* 정책/규정 & 양식 다운로드 */}
-            <section id="policies" className="mt-10 scroll-mt-20">
-              <h2 className="text-lg font-semibold">정책 · 규정</h2>
-              <div className="mt-3 rounded-lg border border-slate-200 bg-white p-4">
-                <ul className="space-y-2 text-sm text-slate-700">
-                  <li className="flex items-start gap-2">
-                    <span className="mt-1 h-1.5 w-1.5 rounded-full bg-slate-500" />
-                    회계/집행 규정 v1.4 (PDF)
-                    <a href="#" className="ml-auto text-xs underline">
-                      다운로드
-                    </a>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="mt-1 h-1.5 w-1.5 rounded-full bg-slate-500" />
-                    학생 복지 지침 v1.2 (PDF)
-                    <a href="#" className="ml-auto text-xs underline">
-                      다운로드
-                    </a>
-                  </li>
-                </ul>
-              </div>
-
-              <h3 className="mt-8 text-base font-semibold">양식 다운로드</h3>
-              <div className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
-                {[
-                  { label: "공문 양식(대내)", ext: "DOCX" },
-                  { label: "공문 양식(대외)", ext: "DOCX" },
-                  { label: "집행 요청서", ext: "XLSX" },
-                  { label: "회의록 양식", ext: "DOCX" },
-                  { label: "사업계획서", ext: "PPTX" },
-                  { label: "결과 보고서", ext: "PPTX" },
-                ].map((f) => (
-                  <a
-                    key={f.label}
-                    href="#"
-                    className="flex items-center justify-between rounded-md border border-slate-200 bg-white px-4 py-3 text-sm hover:bg-slate-50"
-                  >
-                    <span>{f.label}</span>
-                    <span className="text-xs text-slate-400">{f.ext}</span>
-                  </a>
-                ))}
-              </div>
-            </section>
-
-            {/* 브랜딩 에셋 & 미디어 키트 */}
-            <section id="brand" className="mt-10 scroll-mt-20">
-              <h2 className="text-lg font-semibold">
-                브랜딩 에셋 · 미디어 키트
-              </h2>
+            {/* 핵심 규정류: 회칙/세칙 */}
+            <section id="bylaws" className="mt-10 scroll-mt-20">
+              <h2 className="text-lg font-semibold">핵심 규정류</h2>
               <div className="mt-3 grid grid-cols-1 gap-4 md:grid-cols-2">
-                <div className="rounded-lg border border-slate-200 bg-white p-4">
-                  <p className="text-sm font-semibold">로고 & 가이드</p>
-                  <div className="mt-2 aspect-[16/9] w-full rounded-md bg-slate-100" />
-                  <ul className="mt-2 space-y-1 text-sm text-slate-700">
-                    <li>· 로고(ai, svg, png)</li>
-                    <li>· 색상/폰트 사용 규정</li>
-                  </ul>
-                  <div className="mt-3 flex gap-2">
-                    <a
-                      href="#"
-                      className="rounded-md border border-slate-300 px-3 py-1 text-xs hover:bg-slate-50"
-                    >
-                      가이드 보기
-                    </a>
-                    <a
-                      href="#"
-                      className="rounded-md bg-[#5b61a8] px-3 py-1 text-xs text-white"
-                    >
-                      ZIP 다운로드
-                    </a>
+                <RegCard
+                  title="총학생회 회칙 v4.0 (전면 개정)"
+                  date="2025-01-20"
+                  desc="총학생회 조직/기능/의결/재정 등 기본 규범"
+                  href="#"
+                  badge="총학생회 회칙"
+                />
+                <RegCard
+                  title="선거 시행 세칙 v2.1 (2025 개정)"
+                  date="2025-02-05"
+                  desc="선거 일정/자격/절차/선거운동/유의사항"
+                  href="#"
+                  badge="선거 시행 세칙"
+                />
+              </div>
+            </section>
+
+            {/* 가이드라인 */}
+            <section id="guides" className="mt-10 scroll-mt-20">
+              <h2 className="text-lg font-semibold">가이드라인</h2>
+              <div className="mt-3 grid grid-cols-1 gap-4 md:grid-cols-2">
+                <GuideCard
+                  title="행사 운영 가이드 v1.3"
+                  points={[
+                    "안전·시설·보험",
+                    "진행 동선",
+                    "리스크 관리 체크리스트",
+                  ]}
+                  href="#"
+                />
+                <GuideCard
+                  title="홍보물 제작 가이드 v1.1"
+                  points={["로고/색상/폰트 규정", "SNS·인쇄물 적용 예시"]}
+                  href="#"
+                />
+              </div>
+            </section>
+
+            {/* 전공선택 자료집 */}
+            <section id="majorbook" className="mt-10 scroll-mt-20">
+              <h2 className="text-lg font-semibold">전공선택 자료집</h2>
+              <div className="mt-3 rounded-lg border border-slate-200 bg-white p-4">
+                <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+                  <div>
+                    <p className="text-sm font-semibold">
+                      전공선택 자료집 2025 (통합판)
+                    </p>
+                    <p className="text-xs text-slate-600">
+                      학과 소개 · 커리큘럼 · 선배 팁 · 비교과
+                    </p>
                   </div>
-                </div>
-                <div className="rounded-lg border border-slate-200 bg-white p-4">
-                  <p className="text-sm font-semibold">미디어 키트</p>
-                  <div className="mt-2 aspect-[16/9] w-full rounded-md bg-slate-100" />
-                  <ul className="mt-2 space-y-1 text-sm text-slate-700">
-                    <li>· 소개자료 PDF</li>
-                    <li>· 사진/영상 셋(선택)</li>
-                  </ul>
-                  <div className="mt-3 flex gap-2">
+                  <div className="flex gap-2">
                     <a
                       href="#"
                       className="rounded-md border border-slate-300 px-3 py-1 text-xs hover:bg-slate-50"
@@ -325,47 +294,76 @@ export default function ResourcesPage() {
                       href="#"
                       className="rounded-md bg-[#5b61a8] px-3 py-1 text-xs text-white"
                     >
-                      ZIP 다운로드
+                      다운로드
                     </a>
                   </div>
                 </div>
               </div>
             </section>
 
-            {/* 예산/결산 & 공개 데이터 */}
-            <section id="finance" className="mt-10 scroll-mt-20">
-              <h2 className="text-lg font-semibold">
-                예산 · 결산 · 공개 데이터
-              </h2>
-              <div className="mt-3 grid grid-cols-1 gap-4 md:grid-cols-2">
-                <div className="rounded-lg border border-slate-200 bg-white p-4">
-                  <p className="text-sm font-semibold">예산/결산 요약</p>
-                  <div className="mt-2 h-28 w-full rounded-md bg-slate-100" />
-                  <ul className="mt-2 space-y-1 text-sm text-slate-700">
-                    <li>· 분기별 집행 요약</li>
-                    <li>· 주요 항목 변화</li>
-                  </ul>
+            {/* 회의록 템플릿/예시 */}
+            <section id="minutes" className="mt-10 scroll-mt-20">
+              <h2 className="text-lg font-semibold">회의록</h2>
+              <div className="mt-3 grid grid-cols-1 gap-4 md:grid-cols-3">
+                {[
+                  {
+                    title: "정기회의 회의록 템플릿",
+                    desc: "목차/안건/의결/액션아이템",
+                    href: "#",
+                  },
+                  {
+                    title: "운영위원회 회의록 예시",
+                    desc: "안건 정리·표결 기록 포맷",
+                    href: "#",
+                  },
+                  {
+                    title: "행사 결과 회의록 예시",
+                    desc: "성과·지표·개선사항 회고",
+                    href: "#",
+                  },
+                ].map((c, i) => (
+                  <Card key={i} title={c.title} tag="회의록">
+                    <p className="text-xs text-slate-500">{c.desc}</p>
+                    <div className="mt-3 flex gap-2">
+                      <a
+                        href={c.href}
+                        className="rounded-md border border-slate-300 px-3 py-1 text-xs hover:bg-slate-50"
+                      >
+                        미리보기
+                      </a>
+                      <a
+                        href={c.href}
+                        className="rounded-md bg-[#5b61a8] px-3 py-1 text-xs text-white"
+                      >
+                        다운로드
+                      </a>
+                    </div>
+                  </Card>
+                ))}
+              </div>
+            </section>
+
+            {/* 양식 모음 */}
+            <section id="forms" className="mt-10 scroll-mt-20">
+              <h2 className="text-lg font-semibold">양식</h2>
+              <div className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                {[
+                  { label: "공문 양식(대내)", ext: "DOCX", href: "#" },
+                  { label: "공문 양식(대외)", ext: "DOCX", href: "#" },
+                  { label: "집행 요청서", ext: "XLSX", href: "#" },
+                  { label: "사업계획서 템플릿", ext: "PPTX", href: "#" },
+                  { label: "결과 보고서 템플릿", ext: "PPTX", href: "#" },
+                  { label: "회의록 양식", ext: "DOCX", href: "#" },
+                ].map((f) => (
                   <a
-                    href="#"
-                    className="mt-3 inline-block rounded-md border border-slate-300 px-3 py-1 text-xs hover:bg-slate-50"
+                    key={f.label}
+                    href={f.href}
+                    className="flex items-center justify-between rounded-md border border-slate-200 bg-white px-4 py-3 text-sm hover:bg-slate-50"
                   >
-                    상세 다운로드
+                    <span>{f.label}</span>
+                    <span className="text-xs text-slate-400">{f.ext}</span>
                   </a>
-                </div>
-                <div className="rounded-lg border border-slate-200 bg-white p-4">
-                  <p className="text-sm font-semibold">공개 데이터 샘플</p>
-                  <div className="mt-2 h-28 w-full rounded-md bg-slate-100" />
-                  <ul className="mt-2 space-y-1 text-sm text-slate-700">
-                    <li>· 설문/행사 데이터(비식별)</li>
-                    <li>· 이용 통계</li>
-                  </ul>
-                  <a
-                    href="#"
-                    className="mt-3 inline-block rounded-md border border-slate-300 px-3 py-1 text-xs hover:bg-slate-50"
-                  >
-                    CSV 다운로드
-                  </a>
-                </div>
+                ))}
               </div>
             </section>
           </section>
@@ -386,6 +384,62 @@ function Card({ title, tag, children }) {
         </span>
       </div>
       <div className="mt-2">{children}</div>
+    </div>
+  );
+}
+
+function RegCard({ title, date, desc, href, badge }) {
+  return (
+    <div className="rounded-lg border border-slate-200 bg-white p-4">
+      <div className="flex items-center justify-between">
+        <p className="text-sm font-semibold">{title}</p>
+        <span className="rounded-full border border-[#5b61a8] px-2 py-0.5 text-[10px] text-[#5b61a8]">
+          {badge}
+        </span>
+      </div>
+      <p className="mt-1 text-xs text-slate-600">{date}</p>
+      <p className="mt-2 text-xs text-slate-600">{desc}</p>
+      <div className="mt-3 flex gap-2">
+        <a
+          href={href}
+          className="rounded-md border border-slate-300 px-3 py-1 text-xs hover:bg-slate-50"
+        >
+          전문 보기
+        </a>
+        <a
+          href={href}
+          className="rounded-md bg-[#5b61a8] px-3 py-1 text-xs text-white"
+        >
+          다운로드
+        </a>
+      </div>
+    </div>
+  );
+}
+
+function GuideCard({ title, points = [], href = "#" }) {
+  return (
+    <div className="rounded-lg border border-slate-200 bg-white p-4">
+      <p className="text-sm font-semibold">{title}</p>
+      <ul className="mt-2 space-y-1 text-sm text-slate-700">
+        {points.map((p, i) => (
+          <li key={i}>· {p}</li>
+        ))}
+      </ul>
+      <div className="mt-3 flex gap-2">
+        <a
+          href={href}
+          className="rounded-md border border-slate-300 px-3 py-1 text-xs hover:bg-slate-50"
+        >
+          미리보기
+        </a>
+        <a
+          href={href}
+          className="rounded-md bg-[#5b61a8] px-3 py-1 text-xs text-white"
+        >
+          다운로드
+        </a>
+      </div>
     </div>
   );
 }
