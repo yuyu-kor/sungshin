@@ -1,21 +1,7 @@
+// pages/index.jsx
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-
-/**
- * 성신여자대학교 총학생회 – 단일 페이지 (Pages Router)
- * Tailwind 필요: @tailwind base; @tailwind components; @tailwind utilities;
- * 선택 리소스: public/icons/instagram.svg, public/icons/kakao.svg, public/pattern.svg
- */
-
-// 상단 내비게이션
-const NAV = [
-  { label: "소개", href: "#about" },
-  { label: "공지", href: "/notices/intro" },
-  { label: "편의 정보", href: "#about" },
-  { label: "소통", href: "#contact" },
-  { label: "자료", href: "#resources" },
-];
 
 const NOTICES = [
   {
@@ -73,52 +59,11 @@ const RECENT = [
 export default function SungshinStudentCouncilPage() {
   return (
     <div className="min-h-screen bg-[#f7f7fb] text-slate-900">
-      {/* ====================== Hero + Header (배너 + 네비) ====================== */}
+      {/* ====================== Hero(배너) ====================== */}
       <section className="relative isolate bg-[#6A6FB3] text-white">
-        {/* Header */}
-        <div className="absolute inset-x-0 top-0 z-40">
-          <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4">
-            {/* 로고 */}
-            <div className="flex items-center gap-2">
-              <div className="relative h-8 w-8 overflow-hidden rounded-full bg-white/15 ring-1 ring-white/30">
-                <span className="absolute inset-0 grid place-items-center text-[10px] font-semibold">
-                  SS
-                </span>
-              </div>
-              <span className="text-sm font-semibold tracking-tight">
-                성신여자대학교 총학생회
-              </span>
-            </div>
-
-            {/* 네비게이션 */}
-            <ul className="hidden items-center gap-10 md:flex">
-              {NAV.map((n) => (
-                <li key={n.label} className="relative group">
-                  <Link
-                    href={n.href}
-                    className="text-sm font-medium text-white/90 hover:text-white"
-                  >
-                    {n.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-
-            {/* SNS 버튼 */}
-            <div className="hidden items-center gap-2 md:flex">
-              <SocialCircle label="유튜브" abbr="유튜브" href="#" />
-              <SocialCircle
-                label="인스타그램"
-                abbr="인스타"
-                href="https://instagram.com/sungshinchonghak"
-              />
-              <SocialCircle label="카카오톡" abbr="카톡" href="#" />
-            </div>
-          </div>
-        </div>
-
         {/* 배너 영역(빈 공간 + 도트) */}
-        <div className="mx-auto flex min-h-[360px] max-w-6xl flex-col items-center justify-center px-4 pt-16 pb-12">
+        <div className="mx-auto flex min-h-[360px] max-w-6xl flex-col items-center justify-center px-4 pt-4 pb-12">
+          {/* sticky 헤더 높이만큼 여유가 생기므로 기존 absolute header는 제거 */}
           <div className="mt-24" />
           <div className="mt-24 flex items-center justify-center gap-3 pb-2">
             {[0, 1, 2, 3].map((i) => (
@@ -133,7 +78,7 @@ export default function SungshinStudentCouncilPage() {
         </div>
       </section>
 
-      {/* ====================== 중간 1: 소망은 크고/학사일정 + 게시판 ====================== */}
+      {/* ====================== 중간 1: 학사일정 + 게시판 ====================== */}
       <section id="notice" className="bg-white">
         <div className="mx-auto max-w-6xl px-4 py-16">
           <div className="grid gap-10 md:grid-cols-3">
@@ -191,9 +136,8 @@ export default function SungshinStudentCouncilPage() {
         </div>
       </section>
 
-      {/* ====================== 중간 2: 최근 공지(라벤더 그라데이션) ====================== */}
+      {/* ====================== 중간 2: 최근 공지 ====================== */}
       <section className="relative overflow-hidden bg-gradient-to-r from-[#e9e2ff] via-[#efeaff] to-white">
-        {/* 우측 배경 장식(선택) */}
         <div
           className="pointer-events-none absolute right-0 top-0 h-full w-1/3 opacity-20"
           style={{
@@ -250,17 +194,14 @@ export default function SungshinStudentCouncilPage() {
         </div>
       </section>
 
-      {/* ====================== 하단 정보(물품대여 정보 – 타이포형) ====================== */}
+      {/* ====================== 하단 정보(물품대여 정보) ====================== */}
       <section id="about" className="bg-white">
         <div className="mx-auto max-w-6xl px-4 py-16">
-          {/* 섹션 타이틀 */}
           <h2 className="mb-10 text-center text-2xl font-bold tracking-tight text-[#5b61a8]">
             물품대여 정보
           </h2>
 
-          {/* 캠퍼스별 정보 */}
           <div className="grid gap-8 md:grid-cols-2">
-            {/* 돈암수정캠퍼스 */}
             <div className="text-center">
               <h3 className="text-base font-semibold text-[#5b61a8]">
                 돈암수정캠퍼스
@@ -273,7 +214,6 @@ export default function SungshinStudentCouncilPage() {
               </p>
             </div>
 
-            {/* 미아운정캠퍼스 */}
             <div className="text-center">
               <h3 className="text-base font-semibold text-[#5b61a8]">
                 미아운정캠퍼스
@@ -287,10 +227,8 @@ export default function SungshinStudentCouncilPage() {
             </div>
           </div>
 
-          {/* 구분선 */}
           <div className="mx-auto my-10 h-px w-24 rounded bg-[#5b61a8]/30" />
 
-          {/* 대여 물품 리스트 */}
           <div className="mx-auto max-w-4xl text-center">
             <h3 className="text-base font-semibold text-[#5b61a8]">
               대여 물품
@@ -313,80 +251,6 @@ export default function SungshinStudentCouncilPage() {
           </div>
         </div>
       </section>
-
-      {/* ====================== Footer(그대로 유지) ====================== */}
-      <footer className="border-t bg-[#6A6FB3] text-white">
-        <div className="mx-auto max-w-6xl px-4 py-10">
-          <div className="grid gap-6 md:grid-cols-2">
-            <div>
-              <p className="text-sm font-semibold">성신여자대학교 총학생회</p>
-              <p className="mt-1 text-xs opacity-90">
-                이메일: sungshinchonghak@sungshin.ac.kr
-              </p>
-              <p className="mt-1 text-xs opacity-90">전화번호: 02-920-0000</p>
-              <p className="mt-1 text-xs opacity-90">
-                주소: 돈암수정캠퍼스 학생회관 219호 / 미아운정캠퍼스 B동 지하
-                1층 119호
-              </p>
-            </div>
-            <div className="flex flex-col items-end justify-end gap-3">
-              <a
-                href="https://instagram.com/sungshinchonghak"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 text-sm hover:underline"
-              >
-                <Image
-                  src="/icons/instagram.svg"
-                  alt="Instagram"
-                  width={20}
-                  height={20}
-                />
-                @sungshinchonghak
-              </a>
-              <a
-                href="#"
-                className="flex items-center gap-2 text-sm hover:underline"
-              >
-                <Image
-                  src="/icons/kakao.svg"
-                  alt="KakaoTalk"
-                  width={20}
-                  height={20}
-                />
-                SSWU_chonghak
-              </a>
-            </div>
-          </div>
-        </div>
-      </footer>
     </div>
-  );
-}
-
-/* ---------- 스몰 컴포넌트 ---------- */
-function DropdownItem({ href, label }) {
-  return (
-    <Link
-      href={href}
-      className="group flex items-center justify-between rounded-md px-3 py-2 text-sm hover:bg-slate-50"
-    >
-      <span>{label}</span>
-      <span className="text-slate-400 transition group-hover:translate-x-0.5">
-        ›
-      </span>
-    </Link>
-  );
-}
-
-function SocialCircle({ label, abbr, href }) {
-  return (
-    <a
-      href={href}
-      className="grid h-9 w-9 place-items-center rounded-full bg-white/95 text-xs font-semibold text-slate-900 shadow hover:bg-white"
-      aria-label={label}
-    >
-      {abbr}
-    </a>
   );
 }

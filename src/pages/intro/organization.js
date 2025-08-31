@@ -2,8 +2,9 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
+import Navbar from "@/components/Navbar";
 
-const YEARS = ["37대", "36대", "35대", "37대", "36대", "35대"]; // 시안 표기 그대로
+const YEARS = ["37대", "36대", "35대"];
 const DEPTS = [
   "교육정책국",
   "대외협력국",
@@ -21,57 +22,6 @@ export default function OrganizationPage() {
 
   return (
     <div className="min-h-screen bg-[#f7f7fb] text-slate-900">
-      {/* 상단 슬림 네비 */}
-      <header className="sticky top-0 z-40 w-full border-b border-white/10 bg-[#6A6FB3] text-white">
-        <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4">
-          <Link href="/" className="flex items-center gap-2">
-            <div className="grid h-7 w-7 place-items-center rounded-full bg-white/20 text-[10px] font-bold">
-              SS
-            </div>
-            <span className="text-sm font-semibold">
-              성신여자대학교 총학생회
-            </span>
-          </Link>
-          <nav className="hidden gap-8 md:flex">
-            {[
-              { label: "소개", href: "/#about" },
-              { label: "공지", href: "/notices/intro" },
-              { label: "편의 정보", href: "/#about" },
-              { label: "소통", href: "/#contact" },
-              { label: "자료", href: "/#resources" },
-            ].map((n) => (
-              <a
-                key={n.href}
-                href={n.href}
-                className="text-sm text-white/90 hover:text-white"
-              >
-                {n.label}
-              </a>
-            ))}
-          </nav>
-          <div className="hidden items-center gap-2 md:flex">
-            <a
-              className="grid h-8 w-8 place-items-center rounded-full bg-white/90 text-[10px] font-semibold text-slate-900"
-              href="#"
-            >
-              유튜브
-            </a>
-            <a
-              className="grid h-8 w-8 place-items-center rounded-full bg-white/90 text-[10px] font-semibold text-slate-900"
-              href="https://instagram.com/sungshinchonghak"
-            >
-              인스타
-            </a>
-            <a
-              className="grid h-8 w-8 place-items-center rounded-full bg-white/90 text-[10px] font-semibold text-slate-900"
-              href="#"
-            >
-              카톡
-            </a>
-          </div>
-        </div>
-      </header>
-
       {/* 브레드크럼 */}
       <div className="border-b border-slate-200 bg-white">
         <div className="mx-auto flex max-w-6xl items-center gap-2 px-4 py-3 text-xs text-slate-500">
@@ -79,11 +29,8 @@ export default function OrganizationPage() {
             홈
           </Link>
           <span>›</span>
-          <Link
-            href="/notices/intro"
-            className="hover:underline text-slate-700"
-          >
-            총학생회 소개
+          <Link href="/intro/intro" className="hover:underline text-slate-700">
+            소개
           </Link>
           <span>›</span>
           <strong className="text-slate-900">조직도</strong>
@@ -98,7 +45,7 @@ export default function OrganizationPage() {
             <h3 className="mb-2 text-sm font-semibold text-slate-700">소개</h3>
             <nav className="space-y-1 text-sm">
               <Link
-                href="/notices/intro"
+                href="/intro/intro"
                 className="block rounded-md px-3 py-2 text-slate-700 hover:bg-slate-50"
               >
                 총학생회 소개
@@ -106,12 +53,12 @@ export default function OrganizationPage() {
               <span className="block rounded-md bg-violet-50 px-3 py-2 font-medium text-[#5b61a8] ring-1 ring-violet-200">
                 조직도
               </span>
-              <a
-                href="#"
+              <Link
+                href="/intro/history"
                 className="block rounded-md px-3 py-2 text-slate-700 hover:bg-slate-50"
               >
                 연혁 소개
-              </a>
+              </Link>
             </nav>
           </aside>
 
@@ -147,7 +94,7 @@ export default function OrganizationPage() {
                 <LeaderCircle label="부총학생회장" />
               </div>
 
-              {/* 중: 부서 리스트 (알약 버튼) */}
+              {/* 중: 부서 리스트 (세로 일렬 버튼, 원래 배치 그대로) */}
               <div>
                 <div className="mx-auto w-full max-w-[260px] space-y-3">
                   {DEPTS.map((d) => (
@@ -166,9 +113,8 @@ export default function OrganizationPage() {
                 </div>
               </div>
 
-              {/* 우: 말풍선 박스 + 활동내역 */}
-              <div className="grid grid-cols-1 gap-4 md:grid-cols-[1fr_220px]">
-                {/* 말풍선 콘텐츠 박스 */}
+              {/* 우: 말풍선 박스 */}
+              <div>
                 <div
                   className="relative rounded-lg border border-slate-200 bg-slate-100/70 p-4
                                 before:absolute before:-left-3 before:top-6 before:border-y-8 before:border-y-transparent
@@ -183,8 +129,8 @@ export default function OrganizationPage() {
                   </p>
                 </div>
 
-                {/* 활동 내역 */}
-                <div>
+                {/* 활동 내역: 말풍선 밑으로 */}
+                <div className="mt-6">
                   <p className="text-sm font-semibold text-[#5b61a8]">
                     {new Date().getFullYear()} 활동내역
                   </p>
@@ -202,53 +148,6 @@ export default function OrganizationPage() {
           </section>
         </div>
       </main>
-
-      {/* 하단 푸터 */}
-      <footer className="border-t bg-[#6A6FB3] text-white">
-        <div className="mx-auto max-w-6xl px-4 py-8">
-          <div className="grid gap-6 md:grid-cols-2">
-            <div>
-              <p className="text-sm font-semibold">성신여자대학교 총학생회</p>
-              <p className="mt-1 text-xs opacity-90">
-                이메일: sungshinchonghak@sungshin.ac.kr
-              </p>
-              <p className="mt-1 text-xs opacity-90">전화번호: 02-920-0000</p>
-              <p className="mt-1 text-xs opacity-90">
-                주소: 돈암수정캠퍼스 학생회관 219호 / 미아운정캠퍼스 B동 지하
-                1층 119호
-              </p>
-            </div>
-            <div className="flex flex-col items-end justify-end gap-2">
-              <a
-                href="https://instagram.com/sungshinchonghak"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 text-sm hover:underline"
-              >
-                <Image
-                  src="/icons/instagram.svg"
-                  alt="Instagram"
-                  width={20}
-                  height={20}
-                />{" "}
-                @sungshinchonghak
-              </a>
-              <a
-                href="#"
-                className="flex items-center gap-2 text-sm hover:underline"
-              >
-                <Image
-                  src="/icons/kakao.svg"
-                  alt="KakaoTalk"
-                  width={20}
-                  height={20}
-                />{" "}
-                SSWU_chonghak
-              </a>
-            </div>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 }

@@ -6,57 +6,6 @@ import Image from "next/image";
 export default function NoticeIntroPage() {
   return (
     <div className="min-h-screen bg-[#f7f7fb] text-slate-900">
-      {/* 상단 슬림 네비 */}
-      <header className="sticky top-0 z-40 w-full border-b border-white/10 bg-[#6A6FB3] text-white">
-        <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4">
-          <Link href="/" className="flex items-center gap-2">
-            <div className="grid h-7 w-7 place-items-center rounded-full bg-white/20 text-[10px] font-bold">
-              SS
-            </div>
-            <span className="text-sm font-semibold">
-              성신여자대학교 총학생회
-            </span>
-          </Link>
-          <nav className="hidden gap-8 md:flex">
-            {[
-              { label: "소개", href: "/#about" },
-              { label: "공지", href: "/notices/intro" },
-              { label: "편의 정보", href: "/#about" },
-              { label: "소통", href: "/#contact" },
-              { label: "자료", href: "/#resources" },
-            ].map((n) => (
-              <a
-                key={n.href}
-                href={n.href}
-                className="text-sm text-white/90 hover:text-white"
-              >
-                {n.label}
-              </a>
-            ))}
-          </nav>
-          <div className="hidden items-center gap-2 md:flex">
-            <a
-              className="grid h-8 w-8 place-items-center rounded-full bg-white/90 text-[10px] font-semibold text-slate-900"
-              href="#"
-            >
-              유튜브
-            </a>
-            <a
-              className="grid h-8 w-8 place-items-center rounded-full bg-white/90 text-[10px] font-semibold text-slate-900"
-              href="https://instagram.com/sungshinchonghak"
-            >
-              인스타
-            </a>
-            <a
-              className="grid h-8 w-8 place-items-center rounded-full bg-white/90 text-[10px] font-semibold text-slate-900"
-              href="#"
-            >
-              카톡
-            </a>
-          </div>
-        </div>
-      </header>
-
       {/* 브레드크럼 */}
       <div className="border-b border-slate-200 bg-white">
         <div className="mx-auto flex max-w-6xl items-center gap-2 px-4 py-3 text-xs text-slate-500">
@@ -64,7 +13,7 @@ export default function NoticeIntroPage() {
             홈
           </Link>
           <span>›</span>
-          <span className="text-slate-700">공지</span>
+          <span className="text-slate-700">소개</span>
           <span>›</span>
           <strong className="text-slate-900">총학생회 소개</strong>
         </div>
@@ -84,19 +33,19 @@ export default function NoticeIntroPage() {
 
               {/* 조직도 링크 */}
               <Link
-                href="/notices/organization"
+                href="/intro/organization"
                 className="block rounded-md px-3 py-2 text-slate-700 hover:bg-slate-50"
               >
                 조직도
               </Link>
 
               {/* 연혁 소개 (아직 미구현이라면 # 대신 차후 경로로) */}
-              <a
-                href="/notices/history"
+              <Link
+                href="/intro/history"
                 className="block rounded-md px-3 py-2 text-slate-700 hover:bg-slate-50"
               >
                 연혁 소개
-              </a>
+              </Link>
             </nav>
           </aside>
 
@@ -200,53 +149,6 @@ export default function NoticeIntroPage() {
           </section>
         </div>
       </main>
-
-      {/* 하단 푸터(간단) */}
-      <footer className="border-t bg-[#6A6FB3] text-white">
-        <div className="mx-auto max-w-6xl px-4 py-8">
-          <div className="grid gap-6 md:grid-cols-2">
-            <div>
-              <p className="text-sm font-semibold">성신여자대학교 총학생회</p>
-              <p className="mt-1 text-xs opacity-90">
-                이메일: sungshinchonghak@sungshin.ac.kr
-              </p>
-              <p className="mt-1 text-xs opacity-90">전화번호: 02-920-0000</p>
-              <p className="mt-1 text-xs opacity-90">
-                주소: 돈암수정캠퍼스 학생회관 219호 / 미아운정캠퍼스 B동 지하
-                1층 119호
-              </p>
-            </div>
-            <div className="flex flex-col items-end justify-end gap-2">
-              <a
-                href="https://instagram.com/sungshinchonghak"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 text-sm hover:underline"
-              >
-                <Image
-                  src="/icons/instagram.svg"
-                  alt="Instagram"
-                  width={20}
-                  height={20}
-                />
-                @sungshinchonghak
-              </a>
-              <a
-                href="#"
-                className="flex items-center gap-2 text-sm hover:underline"
-              >
-                <Image
-                  src="/icons/kakao.svg"
-                  alt="KakaoTalk"
-                  width={20}
-                  height={20}
-                />
-                SSWU_chonghak
-              </a>
-            </div>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 }
