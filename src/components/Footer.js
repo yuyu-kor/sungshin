@@ -1,6 +1,5 @@
 // components/Footer.jsx
 import React from "react";
-import Image from "next/image";
 
 export default function Footer({
   className = "border-t bg-[#6A6FB3] text-white",
@@ -19,6 +18,7 @@ export default function Footer({
     <footer className={className}>
       <div className={containerClassName}>
         <div className="grid gap-6 md:grid-cols-2">
+          {/* 좌측 - 조직 정보 */}
           <div>
             <p className="text-sm font-semibold">{orgName}</p>
             <p className="mt-1 text-xs opacity-90">이메일: {email}</p>
@@ -26,34 +26,6 @@ export default function Footer({
             <p className="mt-1 text-xs opacity-90">
               주소: {address1} / {address2}
             </p>
-          </div>
-          <div className="flex flex-col items-end justify-end gap-3">
-            <a
-              href={instagramHref}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 text-sm hover:underline"
-            >
-              <Image
-                src="/icons/instagram.svg"
-                alt="Instagram"
-                width={20}
-                height={20}
-              />
-              {instagramHandle}
-            </a>
-            <a
-              href={kakaoHref}
-              className="flex items-center gap-2 text-sm hover:underline"
-            >
-              <Image
-                src="/icons/kakao.svg"
-                alt="KakaoTalk"
-                width={20}
-                height={20}
-              />
-              {kakaoHandle}
-            </a>
           </div>
         </div>
       </div>

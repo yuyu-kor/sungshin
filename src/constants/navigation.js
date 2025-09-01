@@ -1,4 +1,7 @@
 // constants/navigation.js
+import { FaYoutube, FaInstagram } from "react-icons/fa";
+import { SiKakaotalk } from "react-icons/si";
+
 export const NAV = [
   { label: "소개", href: "/intro/intro" },
   { label: "공지", href: "/notices/notices" },
@@ -8,11 +11,19 @@ export const NAV = [
 ];
 
 export const SOCIALS = [
-  { label: "유튜브", abbr: "유튜브", href: "#" },
   {
-    label: "인스타그램",
-    abbr: "인스타",
-    href: "https://instagram.com/sungshinchonghak",
+    label: "YouTube",
+    href: "https://www.youtube.com/@sungshinchonghak",
+    icon: <FaYoutube size={20} color="#FF0000" />,
   },
-  { label: "카카오톡", abbr: "카톡", href: "#" },
+  {
+    label: "Instagram",
+    href: "https://www.instagram.com/sungshinchonghak/",
+    icon: <FaInstagram size={20} color="#E4405F" />,
+  },
+  {
+    label: "KakaoTalk",
+    href: "http://pf.kakao.com/_axivXb",
+    icon: <SiKakaotalk size={20} color="#000000" />,
+  },
 ];

@@ -1,7 +1,9 @@
 // pages/communication/index.jsx
 import React from "react";
 import Link from "next/link";
-import Image from "next/image";
+import { FaInstagram } from "react-icons/fa";
+import { SiKakaotalk } from "react-icons/si";
+import { FaYoutube } from "react-icons/fa";
 
 export default function CommunicationPage() {
   const [form, setForm] = React.useState({
@@ -69,36 +71,21 @@ export default function CommunicationPage() {
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 text-sm hover:underline"
               >
-                <Image
-                  src="/icons/instagram.svg"
-                  alt="Instagram"
-                  width={18}
-                  height={18}
-                />
+                <FaInstagram size={18} color="#E4405F" />
                 Instagram
               </a>
               <a
                 href="#"
                 className="flex items-center gap-2 text-sm hover:underline"
               >
-                <Image
-                  src="/icons/kakao.svg"
-                  alt="Kakao"
-                  width={18}
-                  height={18}
-                />
+                <SiKakaotalk size={18} color="#000000" />
                 KakaoTalk 채널
               </a>
               <a
                 href="#"
                 className="flex items-center gap-2 text-sm hover:underline"
               >
-                <Image
-                  src="/icons/youtube.svg"
-                  alt="YouTube"
-                  width={18}
-                  height={18}
-                />
+                <FaYoutube size={18} color="#FF0000" />
                 YouTube
               </a>
             </div>

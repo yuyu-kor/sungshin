@@ -68,9 +68,9 @@ export default function NavBar({
               key={s.label}
               href={s.href}
               aria-label={s.label}
-              className="grid h-10 w-10 place-items-center rounded-full bg-white text-[11px] font-semibold text-slate-900 shadow ring-1 ring-black/5 hover:brightness-95"
+              className="grid h-10 w-10 place-items-center rounded-full bg-white text-slate-900 shadow ring-1 ring-black/5 hover:brightness-95"
             >
-              {s.abbr}
+              {s.icon}
             </a>
           ))}
         </div>
